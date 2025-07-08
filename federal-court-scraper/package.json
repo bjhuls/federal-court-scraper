@@ -1,0 +1,38 @@
+{
+  "name": "federal-court-scraper",
+  "version": "1.0.0",
+  "description": "Web scraper for tracking new cases in 7 federal district courts",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "dotenv": "^16.0.0",
+    "winston": "^3.8.2",
+    "moment": "^2.29.4",
+    "nodemailer": "^6.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "jest": "^29.0.0",
+    "prettier": "^2.7.1"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": [
+    "puppeteer",
+    "webscraper",
+    "federal-courts",
+    "legal-tech"
+  ],
+  "author": "",
+  "license": "MIT"
+}

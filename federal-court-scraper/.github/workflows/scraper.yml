@@ -1,0 +1,51 @@
+name: Run Federal Court Scraper
+
+on:
+  schedule:
+    # Run at 9:00 AM on weekdays (Monday through Friday)
+    - cron: '0 9 * * 1-5'
+  
+  # Allow manual triggers
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    name: Run Scraper
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run scraper
+      env:
+        NODE_ENV: production
+        # Add any required environment variables here
+        # For example:
+        # EMAIL_ENABLED: 'true'
+        # EMAIL_FROM: 'noreply@example.com'
+        # EMAIL_TO: 'user@example.com'
+        # SMTP_HOST: 'smtp.example.com'
+        # SMTP_PORT: '587'
+        # SMTP_USER: ${{ secrets.SMTP_USER }}
+        # SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      run: npm start
+    
+    - name: Upload results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: court-cases
+        path: |
+          data/
+          logs/
+        retention-days: 7
